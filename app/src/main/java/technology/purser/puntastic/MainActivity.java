@@ -36,13 +36,30 @@ public class MainActivity extends AppCompatActivity {
         float largeBaseSize = 500;
         float smallBaseSize = 300;
 
-        out_pun.setTextSize(largeBaseSize/pun.getPun().length());
-        out_base.setTextSize(smallBaseSize/pun.getBaseWord().length());
+        float maxLargeFontSize = 70;
+        float maxSmallFontSize = 40;
 
+        float largeFontSize = 0;
+        float smallFontSize = 0;
+
+        if((pun.getPun() != null) && (pun.getPun().length() > 0)){
+            largeFontSize = largeBaseSize/pun.getPun().length();
+        }
+
+        if((pun.getBaseWord() != null) && (pun.getBaseWord().length() > 0)){
+            smallFontSize = smallBaseSize/pun.getBaseWord().length();
+        }
+
+        if((largeFontSize > maxLargeFontSize) || (smallFontSize > maxSmallFontSize)){
+            largeFontSize = maxLargeFontSize;
+            smallFontSize = maxSmallFontSize;
+        }
+
+        out_pun.setTextSize(largeFontSize);
+        out_base.setTextSize(smallFontSize);
 
         out_pun.setText(pun.getPun());
         out_base.setText(pun.getBaseWord());
-
 
     }
 }
