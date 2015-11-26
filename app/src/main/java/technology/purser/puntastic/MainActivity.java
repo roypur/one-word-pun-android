@@ -1,15 +1,15 @@
 package technology.purser.puntastic;
 
-import android.app.ActionBar;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.view.View;
 import go.puntastic.Puntastic;
 import go.puntastic.Puntastic.Pun;
+import android.widget.TextView.OnEditorActionListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,16 +28,28 @@ public class MainActivity extends AppCompatActivity {
 
         Puntastic.Load("dictionary.gob");
 
+
+        in.setOnEditorActionListener(new OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                makePun();
+                return true;
+            }
+        });
+
     }
     public void makePun(View v){
+        makePun();
+    }
+    public void makePun(){
         String inText = in.getText().toString();
         Pun pun = Puntastic.Get(inText);
 
-        float largeBaseSize = 500;
-        float smallBaseSize = 300;
+        float largeBaseSize = 400;
+        float smallBaseSize = 200;
 
-        float maxLargeFontSize = 70;
-        float maxSmallFontSize = 40;
+        float maxLargeFontSize = 50;
+        float maxSmallFontSize = 25;
 
         float largeFontSize = 0;
         float smallFontSize = 0;
@@ -62,4 +74,5 @@ public class MainActivity extends AppCompatActivity {
         out_base.setText(pun.getBaseWord());
 
     }
+
 }
